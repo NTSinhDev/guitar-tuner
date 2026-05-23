@@ -1,73 +1,82 @@
-# React + TypeScript + Vite
+# 🎸 Antigravity Guitar Tuner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Một ứng dụng chỉnh dây đàn guitar và các nhạc cụ dây trực quan, hiện đại, chính xác cao và mượt mà, hoạt động trực tiếp trên trình duyệt của bạn dưới dạng **Progressive Web App (PWA)**.
 
-Currently, two official plugins are available:
+👉 **Trải nghiệm trực tuyến tại**: [**https://nts-tunner.surge.sh/**](https://nts-tunner.surge.sh/)
+*(Lưu ý: Bạn nên sử dụng giao thức HTTPS để trình duyệt cấp quyền truy cập Microphone).*
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Tính năng nổi bật
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Chính xác & Nhạy bén**: Sử dụng thuật toán **Autocorrelation (Tự tương quan)** tiên tiến để phân tích tần số âm thanh từ microphone trong thời gian thực.
+- **Trực quan & Mượt mà**: Kim chỉ tone (needle dial) và vòng chỉ số được làm mượt bằng thuật toán **Exponential Moving Average (EMA)** giúp giảm nhiễu nhiễu động (jitter), mang lại chuyển động mượt mà và trực quan nhất.
+- **Hỗ trợ nhiều Nhạc cụ**:
+  - **Guitar** (Standard, Drop D, DADGAD, Half-step Down, Open G...)
+  - **Ukulele** (Standard)
+  - **Bass** (Standard 4 dây, 5 dây)
+  - **Violin** (Standard)
+- **Tự phát âm thanh tham chiếu**: Click vào từng khóa đàn (peg) ảo để nghe âm thanh mẫu được tổng hợp trực tiếp từ **Web Audio API** (OscillatorNode).
+- **Giao diện Cao cấp**: Phong cách **Dark Mode** hiện đại kết hợp hiệu ứng **Glassmorphism (Kính mờ)** và các dải sáng Neon cyan/blue sang trọng.
+- **Hỗ trợ PWA**: Có thể cài đặt trực tiếp lên điện thoại hoặc máy tính như một ứng dụng độc lập với bộ icon được tùy biến chuyên nghiệp, hỗ trợ offline.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Công nghệ sử dụng
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Frontend Core**: [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), [Vite](https://vite.dev/)
+- **Audio Processing**: [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) (AnalyserNode, Microphone Stream, OscillatorNode)
+- **Styling**: Vanilla CSS (tối ưu hóa tùy biến và hiệu năng render)
+- **PWA**: `vite-plugin-pwa` với cấu hình service worker và bộ asset tùy biến đầy đủ (`favicon.svg`, `mask-icon.svg`, `pwa-192x192.png`, `pwa-512x512.png`).
+- **Icons**: `lucide-react`
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 Hướng dẫn chạy dự án dưới Local
+
+### 1. Yêu cầu hệ thống
+Đảm bảo máy tính của bạn đã cài đặt [Node.js](https://nodejs.org/) (khuyến nghị phiên bản LTS).
+
+### 2. Cài đặt các thư viện phụ thuộc
+Mở terminal tại thư mục dự án và chạy lệnh:
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 3. Khởi chạy môi trường phát triển (Development)
+Chạy lệnh sau để khởi động local dev server:
+```bash
+npm run dev
 ```
+Trình duyệt sẽ tự động mở trang web tại địa chỉ `http://localhost:5173`.
+
+### 4. Build sản phẩm (Production)
+Để tối ưu hóa mã nguồn và đóng gói dự án trước khi triển khai:
+```bash
+npm run build
+```
+Thư mục chứa sản phẩm hoàn chỉnh sau khi build sẽ là `/dist`.
+
+---
+
+## 🌐 Triển khai (Deployment) lên Surge.sh
+
+Dự án hiện tại được triển khai bằng Surge thông qua các bước sau:
+
+1. Đảm bảo đã chạy build dự án thành công:
+   ```bash
+   npm run build
+   ```
+2. Deploy thư mục `dist` lên tên miền tùy chỉnh:
+   ```bash
+   npx surge dist nts-tuner.surge.sh
+   ```
+
+---
+
+## 📝 Giấy phép
+Dự án được phân phối dưới giấy phép **MIT**. Bạn hoàn toàn có thể tự do sao chép, chỉnh sửa và đóng góp cho dự án này.
+
+---
+
+*Phát triển bởi **NTSinhDev** với sự hỗ trợ từ trợ lý AI **Antigravity** (Google DeepMind).* 🎸✨
